@@ -26,11 +26,11 @@ public class APIController {
     }
     @GetMapping("/currentime")
     public ResponseEntity<Object> getDate() {
-        Map<String, > data = new HashMap<>();
+        Map<String, Object> data = new HashMap<>();
         LocalDate localDate = LocalDate.now();
         LocalTime localTime = LocalTime.now();
         data.put("localDate", localDate);
-        data.put("localTime", "localTime");
+        data.put("localTime", localTime);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
