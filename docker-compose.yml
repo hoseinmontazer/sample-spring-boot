@@ -1,0 +1,30 @@
+version: "3.5"
+
+networks:
+  uid:
+    external: true
+  monitoring:
+    external: true
+services:
+  sample-spring:
+    image: registry.uid.ir/hosien/sample-java:develop
+    restart: always
+    container_name: sample-spring
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    ports:
+      - "8099:8080"
+    volumes:
+      - /docker/sample-spring/logs/:/logs
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      uid:
+      monitoring:
+
+    logging:
+      driver: 'fluentd'
+      options:
+        fluentd-address: 192.168.10.10:24224
+        tag: '{{.ImageName}}/{{.Name}}/{{.ID}}'
+
