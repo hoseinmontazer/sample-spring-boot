@@ -1,15 +1,23 @@
 package ir.uid.hosein;
 
 
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -33,6 +41,47 @@ public class APIController {
         data.put("localTime", localTime);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
+
+
+    // @GetMapping("/sendsms")
+    @RequestMapping(value = "/sendsms", method = RequestMethod.POST)
+    @ResponseBody
+    public String greetingJson(HttpEntity<String> httpEntity) {
+        String json = httpEntity.getBody();
+    // json contains the plain json string
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(json);
+        String ja_data = json.getClass().getName();
+        System.out.println(ja_data);
+
+        for ( int i=0; i < json.length(); i++){
+            System.out.println(i);
+        }
+
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        return json;
+    }
+    
+
+
+
+    
+    // public ResponseEntity<Object> getmsg() {
+    //     Map<String, Object> data = new HashMap<>();
+    //     LocalDate localDate = LocalDate.now();
+    //     LocalTime localTime = LocalTime.now();
+    //     data.put("localDate", localDate);
+    //     data.put("localTime", localTime);
+        
+    //     return new ResponseEntity<>(data, HttpStatus.OK);
+    // }
+    // public String about() {
+
+    //     return "This is About page; POST request";
+    // }
+
+
+
 
     public String creditscore() {
         // int creditScoreMin = 500;
