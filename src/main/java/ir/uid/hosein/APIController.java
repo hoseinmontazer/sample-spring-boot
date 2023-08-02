@@ -5,18 +5,16 @@ package ir.uid.hosein;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.http.HttpEntity;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -44,13 +42,19 @@ public class APIController {
 
     // @GetMapping("/sendsms")
     // @RequestMapping(value = "/sendsms", method = RequestMethod.POST)
+    @ExceptionHandler(CaughtCustomException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @RequestMapping(
         value = "/sendsms", 
         method = RequestMethod.POST)
-    public void process(@RequestBody Map<String, Object> payload) 
+    public String process(@RequestBody Map<String, Object> payload)
+    
         throws Exception {
-      System.out.println("+++++++++++++++++++++++++++");
-      System.out.println(payload.get("hi"));
+            System.out.println(payload);
+            Object findHi =  payload.get("hi");
+            System.out.println("+++++++++++++++++++++++++++");
+            System.out.println(findHi);
+            return "status:200";
     
     }
     //return "Post some Foos";
