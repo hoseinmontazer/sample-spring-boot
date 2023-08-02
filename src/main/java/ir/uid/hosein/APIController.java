@@ -7,7 +7,6 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
@@ -44,23 +43,19 @@ public class APIController {
 
 
     // @GetMapping("/sendsms")
-    @RequestMapping(value = "/sendsms", method = RequestMethod.POST)
-    @ResponseBody
-    public String greetingJson(HttpEntity<String> httpEntity) {
-        String json = httpEntity.getBody();
-    // json contains the plain json string
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println(json);
-        String ja_data = json.getClass().getName();
-        System.out.println(ja_data);
-
-        for ( int i=0; i < json.length(); i++){
-            System.out.println(i);
-        }
-
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        return json;
+    // @RequestMapping(value = "/sendsms", method = RequestMethod.POST)
+    @RequestMapping(
+        value = "/sendsms", 
+        method = RequestMethod.POST)
+    public void process(@RequestBody Map<String, Object> payload) 
+        throws Exception {
+      System.out.println("+++++++++++++++++++++++++++");
+      System.out.println(payload.get("hi"));
+    
     }
+    //return "Post some Foos";
+
+    //}
     
 
 
